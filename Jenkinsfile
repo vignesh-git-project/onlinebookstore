@@ -14,7 +14,7 @@ pipeline {
                 stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh 'mvn clean install sonar:sonar'
+                    sh "/opt/sonar-scanner/bin/sonarqubescanner/bin/sonar-scanner -Dsonar.host.url=http://192.168.112.128:9000 -Dsonar.projectName=vignesh-git-project -Dsonar.projectVersion=1.0 -Dsonar.projectKey=vignesh-git-project:app -Dsonar.sources=. -Dsonar.projectBaseDir=/var/lib/jenkins/workspace/onlinebookstore_J2EE"
                 }
             }
         }
