@@ -48,8 +48,8 @@ pipeline {
                  def server = Artifactory.server 'jfrog'
                  def uploadSpec = """{
                     "files": [{
-                       "pattern": "**/target/*.war",
-           	       "target": "example-repo-local/${APP_REPO}/${version.trim()}/"
+                       "pattern": "**/target/*",
+           	       "target": "example-repo-local/"
                     }]
                  }"""
 
