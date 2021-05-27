@@ -47,8 +47,7 @@ pipeline {
                     spec: """{
                             "files": [
                                     {
-                                        "pattern": "/job/bookstore/ws/target/*.war",
-                                        "target": "libs-snapshot-local"
+                                        "target": "jfrog"
                                     }
                                 ]
                             }"""
