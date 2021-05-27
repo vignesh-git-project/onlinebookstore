@@ -39,7 +39,7 @@ pipeline {
         }
         
         
-        stage ('upload') {
+       stage ('upload') {
     gitlabCommitStatus("upload") {
       def server = Artifactory.server "admin@jfrog"
       def buildInfo = Artifactory.newBuildInfo()
@@ -68,6 +68,7 @@ pipeline {
       server.publishBuildInfo buildInfo
     }
   }
+}
 
 
         stage ('Publish build info') {
