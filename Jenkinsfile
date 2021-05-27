@@ -49,7 +49,7 @@ pipeline {
                  def uploadSpec = """{
                     "files": [{
                        "pattern": "**/target/*.war",
-           	       "target": "example-repo-local"
+           	       "target": "example-repo-local/${APP_REPO}/${version.trim()}/"
                     }]
                  }"""
 
