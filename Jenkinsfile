@@ -42,13 +42,22 @@ pipeline {
         
     
 
-        stage ('Publish build info') {
-            steps {
-                rtPublishBuildInfo (
-                    serverId: jfrog
-                )
+        stage('upload') {
+           steps {
+              script { 
+                 def server = Artifactory.server 'jfrog'
+                 def uploadSpec = """{
+                    "files": [{
+                       "pattern": "**/target/*.jar",
+           	       "target": "libs-snapshot-local"
+                    }]
+                 }"""
+
+                 server.upload(uploadSpec) 
+               }
             }
         }
+
         
         
         
