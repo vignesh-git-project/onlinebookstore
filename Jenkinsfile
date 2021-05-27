@@ -47,7 +47,7 @@ pipeline {
                     spec: """{
                             "files": [
                                     {
-                                        "target": "jfrog"
+                                        "target": "jfrog/"
                                     }
                                 ]
                             }"""
