@@ -39,21 +39,36 @@ pipeline {
         }
         
         
-        stage ('Upload file') {
-            steps {
-                rtUpload (
-                    // Obtain an Artifactory server instance, defined in Jenkins --> Manage Jenkins --> Configure System:
-                    serverId: jfrog,
-                    spec: """{
-                            "files": [
-                                    {
-                                        "target": "jfrog/"
-                                    }
-                                ]
-                            }"""
-                )
-            }
-        }
+        stage ('upload') {
+    gitlabCommitStatus("upload") {
+      def server = Artifactory.server "admin@jfrog"
+      def buildInfo = Artifactory.newBuildInfo()
+      buildInfo.env.capture = true
+      buildInfo.env.collect()
+
+      def uploadSpec = """{
+        "files": [
+          {
+            "pattern": "**/target/*.jar",
+            "target": "libs-snapshot-local"
+          }, {
+            "pattern": "**/target/*.pom",
+            "target": "libs-snapshot-local"
+          }, {
+            "pattern": "**/target/*.war",
+            "target": "libs-snapshot-local"
+          }
+        ]
+      }"""
+      // Upload to Artifactory.
+      server.upload spec: uploadSpec, buildInfo: buildInfo
+
+      buildInfo.retention maxBuilds: 10, maxDays: 7, deleteBuildArtifacts: true
+      // Publish build info.
+      server.publishBuildInfo buildInfo
+    }
+  }
+
 
         stage ('Publish build info') {
             steps {
