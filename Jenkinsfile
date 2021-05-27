@@ -33,7 +33,7 @@ pipeline {
        stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh "/opt/sonar-scanner/bin/sonar-scanner -Dsonar.host.url=http://192.168.112.128:9000 -Dsonar.projectName=vignesh-git-project -Dsonar.projectVersion=1.0 -Dsonar.projectKey=vignesh-git-project:app -Dsonar.sources=. -Dsonar.projectBaseDir=/var/lib/jenkins/workspace/onlinebookstore_J2EE"
+                    sh "/opt/sonar-scanner/bin/sonar-scanner"
                 }
             }
         }
