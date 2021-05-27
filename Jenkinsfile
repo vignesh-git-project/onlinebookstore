@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
 
@@ -39,30 +40,7 @@ pipeline {
         }
         
         
-        stage ('Upload file') {
-            steps {
-                rtUpload (
-                    // Obtain an Artifactory server instance, defined in Jenkins --> Manage Jenkins --> Configure System:
-                    serverId: jfrog,
-                    spec: """{
-                            "files": [
-                                    {
-                                        {
-            "pattern": "**/target/*.jar",
-            "target": "libs-snapshot-local"
-          }, {
-            "pattern": "**/target/*.pom",
-            "target": "libs-snapshot-local"
-          }, {
-            "pattern": "**/target/*.war",
-            "target": "libs-snapshot-local"
-          }
-                                    }
-                                ]
-                            }"""
-                )
-            }
-        }
+    
 
         stage ('Publish build info') {
             steps {
