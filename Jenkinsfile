@@ -49,7 +49,7 @@ pipeline {
                  def uploadSpec = """{
                     "files": [{
                        "pattern": "**/target/*.jar",
-           	       "target": "libs-snapshot-local"
+           	       "target": "example-repo-local"
                     }]
                  }"""
 
