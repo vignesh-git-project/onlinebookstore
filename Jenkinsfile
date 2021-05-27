@@ -58,17 +58,17 @@ pipeline {
             "pattern": "**/target/*.war",
             "target": "libs-snapshot-local"
           }
-        ]
-      }"""
+                ]
+                         }"""
       // Upload to Artifactory.
       server.upload spec: uploadSpec, buildInfo: buildInfo
 
       buildInfo.retention maxBuilds: 10, maxDays: 7, deleteBuildArtifacts: true
       // Publish build info.
       server.publishBuildInfo buildInfo
-    }
-  }
-}
+                                }
+                        }
+
 
 
         stage ('Publish build info') {
@@ -76,8 +76,8 @@ pipeline {
                 rtPublishBuildInfo (
                     serverId: jfrog
                 )
-            }
-        }
+                  }
+                                     }
         
         
         
