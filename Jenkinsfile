@@ -37,6 +37,35 @@ pipeline {
                 }
             }
         }
+        
+        
+        stage ('Upload file') {
+            steps {
+                rtUpload (
+                    // Obtain an Artifactory server instance, defined in Jenkins --> Manage Jenkins --> Configure System:
+                    serverId: jfrog,
+                    spec: """{
+                            "files": [
+                                    {
+                                        "pattern": "/job/bookstore/ws/target/*.war",
+                                        "target": "libs-snapshot-local"
+                                    }
+                                ]
+                            }"""
+                )
+            }
+        }
+
+        stage ('Publish build info') {
+            steps {
+                rtPublishBuildInfo (
+                    serverId: jfrog
+                )
+            }
+        }
+        
+        
+        
     }
 }
 
