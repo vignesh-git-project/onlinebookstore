@@ -40,7 +40,7 @@ pipeline {
         
         
        stage ('upload') {
-    gitlabCommitStatus("upload") {
+            steps {
       def server = Artifactory.server "admin@jfrog"
       def buildInfo = Artifactory.newBuildInfo()
       buildInfo.env.capture = true
